@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Action Form for Prime -->
+    <record id="ensah_prime_action_form" model="ir.actions.act_window">
+        <field name="name">Ensah Prime</field>
+        <field name="res_model">ensah.prime</field>
+        <field name="view_mode">tree,form,search,graph,calendar</field>
+    </record>
+
+    <!-- Main Menu Item for Primes -->
+    <menuitem name="Ensah" id="ensah_main_menu"/>
+    <menuitem name="Primes" id="ensah_prime_menu" parent="ensah_main_menu" action="ensah_prime_action_form"/>
+
+    <!-- Form View for Prime -->
+    <record id="ensah_prime_view_form" model="ir.ui.view">
+        <field name="name">Ensah Prime Form</field>
+        <field name="model">ensah.prime</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="note_prime"/>
+                        <field name="commentaire"/>
+                        <field name="trimestre"/>
+                         <field name="date"/>
+                    </group>
+                    <group>
+                        <field name="salaire_principal"/>
+                        <field name="salaire_brut_mensuel"/>
+                        <field name="employee_id"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View for Prime -->
+    <record id="ensah_prime_view_search" model="ir.ui.view">
+        <field name="name">Ensah Prime Search</field>
+        <field name="model">ensah.prime</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="note_prime"/>
+                <field name="trimestre"/>
+                <filter string="Without Comment" name="without_comment"
+                        domain="[('commentaire', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- List View for Prime -->
+    <record id="ensah_prime_action_list" model="ir.ui.view">
+        <field name="name">Ensah Prime List</field>
+        <field name="model">ensah.prime</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="note_prime"/>
+                <field name="commentaire"/>
+                <field name="trimestre"/>
+                <field name="salaire_principal"/>
+                <field name="salaire_brut_mensuel"/>
+                <field name="employee_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Graph View for Prime -->
+    <record id="ensah_prime_action_graph" model="ir.ui.view">
+        <field name="name">Ensah Prime Graph</field>
+        <field name="model">ensah.prime</field>
+        <field name="arch" type="xml">
+            <graph string="Prime by Trimestre" type="bar">
+                <field name="trimestre" type="row"/>
+                <field name="salaire_brut_mensuel" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Calendar View for Prime -->
+    <record id="ensah_prime_view_calendar" model="ir.ui.view">
+        <field name="name">Ensah Prime Calendar</field>
+        <field name="model">ensah.prime</field>
+        <field name="arch" type="xml">
+            <calendar date_start="date" >
+                <field name="note_prime"/>
+                <field name="commentaire"/>
+                <field name="employee_id"/>
+            </calendar>
+        </field>
+    </record>
+
+</odoo>

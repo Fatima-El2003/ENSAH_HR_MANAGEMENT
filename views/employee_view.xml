@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ensah_employee_action_form" model="ir.actions.act_window">
+        <field name="name">Ensah Employee</field>
+        <field name="res_model">ensah.employee</field>
+        <field name="view_mode">tree,form,search,graph,calendar</field>
+    </record>
+
+    <menuitem name="Ensah" id="ensah_main_menu"/>
+    <menuitem name="employees" id="ensah_employee_menu" parent="ensah_main_menu" action="ensah_employee_action_form"/>
+
+    <record id="ensah_employee_view_form" model="ir.ui.view">
+        <field name="name">Ensah Employee Form</field>
+        <field name="model">ensah.employee</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="id"/>
+                        <field name="matricule"/>
+                        <field name="nom"/>
+                        <field name="prenom"/>
+                    </group>
+                    <group>
+                        <field name="fonction"/>
+                        <field name="telephone"/>
+                        <field name="adresse"/>
+                        <field name="email"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+   
+    <!--Search  View-->
+    <record id="ensah_employee_view_search" model="ir.ui.view">
+    <field name="name"> Ensah Employee Search </field>
+    <field name="model">ensah.employee</field>
+    <field name="arch" type="xml">
+    <search>
+    <field name="nom"></field>
+     <field name="telephone"></field>
+     <filter string="No Tel" name="withoud_tel"
+     domain="[('telephone','=',False)]"/>
+    </search>
+    </field>
+    </record>
+     <!--List View -->
+   
+    <record id="ensah_employee_action_list" model="ir.ui.view">
+    <field name="name">Ensah Employee list</field>
+    <field name="model">ensah.employee</field  >
+    <field name="arch" type="xml">
+        <tree>
+            <field name="nom"/>
+            <field name="prenom" />
+            <field name="fonction"/>
+              <field name="adresse"/>
+            <field name="telephone" />
+            <field name="email"/>
+            <field name="matricule"/>
+
+        </tree>
+    </field>
+</record>
+<!--Graph View-->
+<record id="ensah_employee_action_graph" model="ir.ui.view">
+    <field name="name">Ensah Employe</field>
+    <field name="model">ensah.employee</field>
+    <field name="arch" type="xml">
+        <graph string="employees" type="bar">
+            <field name="fonction" type="row"/>
+        </graph>
+    </field>
+</record>
+
+
+
+<!-- Calendar View -->
+<record id="ensah_employee_view_calendar" model="ir.ui.view">
+    <field name="name">Ensah Employee Calendar</field>
+    <field name="model">ensah.employee</field>
+    <field name="arch" type="xml">
+        <calendar date_start="date_embauche" color="fonction">
+            <field name="nom"/>
+            <field name="prenom"/>
+            <field name="fonction"/>
+        </calendar>
+    </field>
+</record>
+
+
+</odoo>

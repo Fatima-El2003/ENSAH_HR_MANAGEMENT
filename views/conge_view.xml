@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action pour EnsahConge -->
+    <record id="ensah_conge_action_form" model="ir.actions.act_window">
+        <field name="name">Ensah Conge</field>
+        <field name="res_model">ensah.conge</field>
+        <field name="view_mode">tree,form,search,graph,calendar</field>
+    </record>
+
+    <!-- Menu pour EnsahConge -->
+    <menuitem name="Ensah" id="ensah_main_menu"/>
+    <menuitem name="Congés" id="ensah_conge_menu" parent="ensah_main_menu" action="ensah_conge_action_form"/>
+
+    <!-- Vue Formulaire pour EnsahConge -->
+    <record id="ensah_conge_view_form" model="ir.ui.view">
+        <field name="name">Ensah Conge Form</field>
+        <field name="model">ensah.conge</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="id_conge"/>
+                        <field name="date_debut"/>
+                        <field name="date_fin"/>
+                    </group>
+                    <group>
+                        <field name="nature"/>
+                        <field name="commentaire"/>
+                    </group>
+                </group>
+
+                <!-- Association avec l'employé -->
+                <group string="Employé">
+                    <field name="employee_id"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue Liste pour EnsahConge -->
+    <record id="ensah_conge_view_tree" model="ir.ui.view">
+        <field name="name">Ensah Conge List</field>
+        <field name="model">ensah.conge</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="id_conge"/>
+                <field name="date_debut"/>
+                <field name="date_fin"/>
+                <field name="nature"/>
+                <field name="commentaire"/>
+                <field name="employee_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vue Recherche pour EnsahConge -->
+    <record id="ensah_conge_view_search" model="ir.ui.view">
+        <field name="name">Ensah Conge Search</field>
+        <field name="model">ensah.conge</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="nature"/>
+                <field name="employee_id"/>
+                <filter string="Without Employee" name="without_employee"
+                        domain="[('employee_id', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue Graph pour EnsahConge -->
+    <record id="ensah_conge_action_graph" model="ir.ui.view">
+        <field name="name">Ensah Conge Graph</field>
+        <field name="model">ensah.conge</field>
+        <field name="arch" type="xml">
+            <graph string="Congés" type="bar">
+                <field name="nature" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Vue Calendar pour EnsahConge -->
+    <record id="ensah_conge_view_calendar" model="ir.ui.view">
+        <field name="name">Ensah Conge Calendar</field>
+        <field name="model">ensah.conge</field>
+        <field name="arch" type="xml">
+            <calendar date_start="date_debut" date_stop="date_fin" color="nature">
+                <field name="id_conge"/>
+                <field name="nature"/>
+            </calendar>
+        </field>
+    </record>
+</odoo>
